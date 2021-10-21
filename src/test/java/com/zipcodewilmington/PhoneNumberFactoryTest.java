@@ -31,7 +31,6 @@ public class PhoneNumberFactoryTest {
         PhoneNumber phoneNumber = PhoneNumberFactory.createPhoneNumberSafely(areaCode, centralOfficeCode, phoneLineCode);
 
         // : Then
-        System.out.println(phoneNumber);
         Assert.assertEquals(null, phoneNumber);
     }
 
