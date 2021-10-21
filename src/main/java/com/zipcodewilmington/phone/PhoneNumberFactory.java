@@ -25,7 +25,14 @@ public final class PhoneNumberFactory {
 
         PhoneNumber[] phoneNumbers = new PhoneNumber[phoneNumberCount];
 
+        for (int i = 0; i < phoneNumberCount; i++) {
+
+            phoneNumbers[i] = createRandomPhoneNumber();
+
+        }
+
         return phoneNumbers;
+
     }
 
     /**
@@ -52,15 +59,17 @@ public final class PhoneNumberFactory {
      */ //TODO - if input is valid, return respective PhoneNumber object, else return null
     public static PhoneNumber createPhoneNumberSafely(int areaCode, int centralOfficeCode, int phoneLineCode) {
 
-        try {
+       String phoneNumber = "(" + areaCode + ")" + "-" + centralOfficeCode + "-" + phoneLineCode;
 
-            String phoneNumber = "(" + areaCode + ")" + "-" + centralOfficeCode + "-" + phoneLineCode;
+        try {
 
             return createPhoneNumber(phoneNumber);
 
         } catch (InvalidPhoneNumberFormatException error) {
 
             error.printStackTrace();
+
+            logger.info(phoneNumber.concat(" is not a valid phone number"));
 
         }
 
@@ -76,6 +85,8 @@ public final class PhoneNumberFactory {
     public static PhoneNumber createPhoneNumber(String phoneNumberString) throws InvalidPhoneNumberFormatException {
 
         PhoneNumber phoneNumber = new PhoneNumber(phoneNumberString);
+
+        logger.info("Attempting to create a new PhoneNumber object with a value of ".concat(phoneNumberString));
 
         return phoneNumber;
 
